@@ -1,10 +1,20 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="page">
+    <page-header />
+    <router-view class="main" />
+    <footer class="footer"></footer>
   </div>
-  <router-view />
 </template>
+
+<script>
+import PageHeader from "@/components/PageHeader.vue";
+
+export default {
+  components: {
+    PageHeader,
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
@@ -15,16 +25,35 @@
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+* {
+  margin: 0px;
+  padding: 0px;
+}
+</style>
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+<style lang="scss" scoped>
+.page {
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;
+  grid-template-rows: 80px auto 100px;
+  grid-template-areas:
+    "header header header"
+    ". main ."
+    "footer footer footer";
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  .header {
+    grid-area: header;
+  }
+
+  .main {
+    grid-area: main;
+    padding: 20px;
+    background-color: rgb(233, 233, 233);
+    border-radius: 4px;
+  }
+
+  .footer {
+    grid-area: footer;
   }
 }
 </style>
