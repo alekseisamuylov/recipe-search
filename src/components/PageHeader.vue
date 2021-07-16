@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { UPDATE_SEARCH_STRING } from "@/store/search.js";
+
 export default {
   data() {
     return {
@@ -27,9 +29,11 @@ export default {
   methods: {
     onSearchClick() {
       if (this.searchString) {
+        this.$store.commit(UPDATE_SEARCH_STRING, this.searchString);
+        
         this.$router.push({
           name: "SearchResult",
-          params: { q: this.searchString },
+          query: { q: this.searchString },
         });
       }
     },

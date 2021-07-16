@@ -10,7 +10,7 @@ const routes = [
     component: Home,
   },
   {
-    path: "/recipes?q=:q",
+    path: "/recipes",
     name: "SearchResult",
     component: SearchResult,
   },

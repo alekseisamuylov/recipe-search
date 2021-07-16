@@ -44,22 +44,17 @@
 </template>
 
 <script>
-import { sendGetRequestRecipeDetails } from "@/api/edamam/edamam-api.js";
+import { mapState } from "vuex";
+import { LOAD_RECIPE_DETAILS } from "@/store/search.js";
 
 export default {
-  data() {
-    return {
-      recipe: null,
-    };
-  },
-
   created() {
-    this.sendRequest(this.$route.params.id);
+    this.loadRecipeDetails();
   },
 
   methods: {
-    async sendRequest(id) {
-      this.recipe = await sendGetRequestRecipeDetails(id);
+    async loadRecipeDetails() {
+      this.$store.dispatch(LOAD_RECIPE_DETAILS);
     },
 
     convertListItem(item) {
@@ -68,11 +63,17 @@ export default {
     },
   },
 
+  computed: {
+    ...mapState({
+      recipe: (state) => state.search.selectedRecipe,
+    }),
+  },
+
   watch: {
     $route(to) {
       const id = to.params.id;
       if (id) {
-        this.sendRequest(id);
+        this.loadRecipeDetails();
       }
     },
   },

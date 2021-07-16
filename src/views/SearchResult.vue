@@ -1,6 +1,11 @@
 <template>
   <div class="main">
-    <div v-for="recipe in recipes" :key="recipe.id" class="recipe" @click="onRecipeClick(recipe.id)">
+    <div
+      v-for="recipe in recipes"
+      :key="recipe.id"
+      class="recipe"
+      @click="onRecipeClick(recipe.id)"
+    >
       <img class="img" :src="recipe.img" />
       <p class="label">{{ recipe.label }}</p>
     </div>
@@ -8,37 +13,43 @@
 </template>
 
 <script>
-import { sendGetRequestRecipesSearch } from "@/api/edamam/edamam-api.js";
+import { mapState } from "vuex";
+import { LOAD_SEARCH_RESULT, UPDATE_SELECTED_RECIPE } from "@/store/search.js";
 
 export default {
-  data() {
-    return {
-      recipes: [],
-    };
-  },
-
   created() {
-    this.sendRequest(this.$route.params.q);
+    this.loadSearchResult();
   },
 
   methods: {
-    async sendRequest(searchString) {
-      this.recipes = await sendGetRequestRecipesSearch(searchString);
+    async loadSearchResult() {
+      this.$store.dispatch(LOAD_SEARCH_RESULT);
     },
 
     onRecipeClick(recipeId) {
-        this.$router.push({
-          name: "RecipeDetails",
-          params: { id: recipeId },
-        });
-    }
+      this.$store.commit(
+        UPDATE_SELECTED_RECIPE,
+        this.recipes.find((r) => r.id === recipeId)
+      );
+
+      this.$router.push({
+        name: "RecipeDetails",
+        params: { id: recipeId },
+      });
+    },
+  },
+
+  computed: {
+    ...mapState({
+      recipes: (state) => state.search.searchRecipeResult,
+    }),
   },
 
   watch: {
     $route(to) {
       const searchString = to.params.q;
       if (searchString) {
-        this.sendRequest(searchString);
+        this.loadSearchResult();
       }
     },
   },

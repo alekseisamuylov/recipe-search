@@ -1,8 +1,8 @@
 import { createStore } from "vuex";
+import search from "./search.js"
 
 export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+  modules: {
+    search
+  },
 });

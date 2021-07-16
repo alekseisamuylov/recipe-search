@@ -39,7 +39,7 @@ function convertRecipesData(recipesData) {
 }
 
 function getRecipeIdFromHref(href) {
-  const ID_POSITION = 16;
+  const ID_POSITION = RECIPES_URI.length + 1;
   return new URL(href).pathname.slice(ID_POSITION);
 }
 
