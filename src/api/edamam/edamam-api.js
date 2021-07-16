@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const URL_BASE = "https://api.edamam.com";
-const APP_ID = "4c16c598";
-const APP_KEY = "fa035bf9ebf2f11798d16dd9223c6aba";
+const APP_ID = process.env.VUE_APP_ID;
+const APP_KEY = process.env.VUE_APP_KEY;
 const TYPE = "type=public";
 
 const RECIPES_URI = "/api/recipes/v2";
