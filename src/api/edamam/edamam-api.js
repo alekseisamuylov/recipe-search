@@ -7,15 +7,15 @@ const TYPE = "type=public";
 
 const RECIPES_URI = "/api/recipes/v2";
 
-async function getRecipes(searchString) {
+async function sendGetRequestRecipesSearch(searchString) {
   const request = `${URL_BASE}${RECIPES_URI}?${TYPE}&app_id=${APP_ID}&app_key=${APP_KEY}&q=${searchString}`;
   const response = await axios.get(request);
 
   return convertRecipesData(response.data);
 }
 
-async function getRecipe(id) {
-  const request = `${URL_BASE}${RECIPES_URI}/${id}?${TYPE}&app_id=${APP_ID}&app_key=${APP_KEY}`;
+async function sendGetRequestRecipeDetails(recipeId) {
+  const request = `${URL_BASE}${RECIPES_URI}/${recipeId}?${TYPE}&app_id=${APP_ID}&app_key=${APP_KEY}`;
   const response = await axios.get(request);
 
   return convertRecipeData(response.data);
@@ -53,4 +53,4 @@ function convertRecipeData(recipeData) {
   };
 }
 
-export { getRecipes, getRecipe };
+export { sendGetRequestRecipesSearch, sendGetRequestRecipeDetails };

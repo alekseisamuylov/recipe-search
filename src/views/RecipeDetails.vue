@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { getRecipe } from "@/api/edamam/edamam-api.js";
+import { sendGetRequestRecipeDetails } from "@/api/edamam/edamam-api.js";
 
 export default {
   data() {
@@ -59,7 +59,7 @@ export default {
 
   methods: {
     async sendRequest(id) {
-      this.recipe = await getRecipe(id);
+      this.recipe = await sendGetRequestRecipeDetails(id);
     },
 
     convertListItem(item) {

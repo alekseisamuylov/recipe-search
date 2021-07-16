@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { getRecipes } from "@/api/edamam/edamam-api.js";
+import { sendGetRequestRecipesSearch } from "@/api/edamam/edamam-api.js";
 
 export default {
   data() {
@@ -23,7 +23,7 @@ export default {
 
   methods: {
     async sendRequest(searchString) {
-      this.recipes = await getRecipes(searchString);
+      this.recipes = await sendGetRequestRecipesSearch(searchString);
     },
 
     onRecipeClick(recipeId) {
