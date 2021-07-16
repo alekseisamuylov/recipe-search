@@ -63,9 +63,7 @@ export default {
     },
 
     convertListItem(item) {
-      console.log(item);
       const result = `${item.label}: ${Math.ceil(item.quantity)}${item.unit}`;
-      console.log(result);
       return result;
     },
   },
